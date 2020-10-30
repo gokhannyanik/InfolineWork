@@ -37,11 +37,6 @@
 </style>
 
 <h2 style="text-align:center">Kullanıcı Listesi</h2>
-<div class="spinner" style="display:block">
-    <div class="center-div">
-        <div class="loader"></div>
-    </div>
-</div>
 <div style="margin-top:10px">
     <table id="myTable">
         <tr class="header">
@@ -86,20 +81,19 @@
 <script>
     $(document).ready(function () {
         setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
-
+        //ajax post için nesne oluşturma
         Checked = new Array();
-
+        
         function CheckedTrue() {
+            //checked olanları objenin içine koyuyoruz
             $("#Satir input:checked").each(
                     function (i) {
-                    console.log($(this).attr("name"));
-
-                    //Checked[i] = $(this).attr("name");
                     CheckedObject = new Object();
                     CheckedObject.PersonId = $(this).attr("name");
                     Checked[i] = CheckedObject;
                     }
             );
+            //Listede checked edilmiş kayıt varmı yok mu 
             var kayitVarmi = Checked.length;
             if (kayitVarmi == 0) {
                 alert("lütfen Kayıt Seçiniz");
@@ -111,6 +105,7 @@
 
         }
 
+        //ajax için server side a post methodu
         function PersonsDelete() {
                 $.ajax({
                     url: '/Home/PersonsDelete',
@@ -129,11 +124,9 @@
                     }
                 });
         }
-        $("#btnDelete").click(function () {
-            console.log(Checked);
+
+        $("#btnDelete").click(function () {          
             CheckedTrue();
-            //aaa();
-            //Checked.pop();
 
         });
 

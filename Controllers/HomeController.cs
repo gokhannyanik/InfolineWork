@@ -17,7 +17,7 @@ namespace InfolineWork.Controllers
         {
             return View();
         }
-
+        //Api yi Veitabanına kaydetme postu
         [HttpPost]
         public JsonResult PersonsSave(IEnumerable<PersonModel> result)
         {
@@ -51,6 +51,7 @@ namespace InfolineWork.Controllers
             return View(KullaniciList);
         }
 
+        //Kullanıcı listesinden seçilen kullanıcıları silme postu
         [HttpPost]
         public JsonResult PersonsDelete(IEnumerable<PersonModel> result)
         {
@@ -77,6 +78,7 @@ namespace InfolineWork.Controllers
             }
         }
 
+        //Rasgele kullanıcı ve soru ekranı
         public ActionResult SoruKullanici()
         {
             var randomQuestion = db.tblQuestion.OrderBy(u => Guid.NewGuid()).FirstOrDefault();
@@ -93,6 +95,7 @@ namespace InfolineWork.Controllers
             return View(newPerson);
         }
 
+        //Kullanıcının sorusuna cevap postu
         [HttpPost]
         public JsonResult SoruKullanici(tblAnswer result)
         {
@@ -109,6 +112,7 @@ namespace InfolineWork.Controllers
             return Json("kaydedildi");
         }
 
+        //kullanıcı soru cevap listesi
         public ActionResult KullaniciCevapList()
         {
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - InfolineWork</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
@@ -23,6 +23,11 @@
     </div>
 
     <div id="main">
+        <div class="spinner" style="display:block">
+            <div class="center-div">
+                <div class="loader"></div>
+            </div>
+        </div>
         <div class="" style="width:100%;margin-top:-60px">
             <span style="font-size:30px;cursor:pointer;margin-left:10px" onclick="openNav()" title="Menü">&#9776; </span>
         </div>
@@ -30,7 +35,6 @@
     </div>
 
     <script>
-
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
             document.getElementById("main").style.marginLeft = "250px";

@@ -7,7 +7,7 @@
     $(document).ready(function () {
         PostData = new Array();
         $("#btnSave").click(function () {
-            
+            //kaydet butonuyla ajax ile server side a post methodu
             $.ajax({
                 url: '/Home/PersonsSave',
                 data: {
@@ -25,14 +25,14 @@
             });
         });
 
-
+        // ekran load olduğunda direk kullanıcı apisini çekmek için ajax ile wep abi get işlemi
         $.ajax({
             url: 'https://randomuser.me/api/?nat=tr&results=10',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
                 setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
-                console.log(data.results.length);
+                //data içerisinde dönerek ekrana kullanıcıları yazma kısmı
                 for (var i = 0; i < data.results.length; i++) {
                     console.log(data.results[i]);
                     $("#myTable").append(' <tr id="">' +
@@ -47,7 +47,7 @@
                         '<div>' + data.results[i].email + '</div>' +
                         '</td>' +
                         '</tr >');
-
+                    //server side a post işlemi yapmak için obje oluşturuyoruz
                     var PostObject = new Object();
                     PostObject.AdSoyad = data.results[i].name.first + ' ' + data.results[i].name.last;
                     PostObject.Telefon = data.results[i].phone;
@@ -83,17 +83,8 @@
         }
 </style>
 <h2 style="text-align:center">Kullanıcılar Api</h2>
-<div style="clear:both">
-    
-</div>
-<div class="spinner" style="display:block">
-    <div class="center-div">
-        <div class="loader"></div>
-    </div>
-</div>
 <table id="myTable">
     <tr class="header">
-
         <th></th>
         <th style="width:30%;">Kişisel Bilgiler</th>
         <th style="width:60%;">

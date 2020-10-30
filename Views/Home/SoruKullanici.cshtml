@@ -6,13 +6,15 @@
 <script>
     $(document).ready(function () {
         setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
+
+        //ajax ile Post işlemi için data nesnesi oluşturuyoruz
         PersonQuestionArray = new Array();
         PersonQuestionObject = new Object();
         PersonQuestionObject.PersonId = @Model.PersonId;
         PersonQuestionObject.QuestionId = @Model.QuestionId;
         
         $("#btnKaydet").click(function () {
-
+            //cevap değeri boş gönderilmemesi için kontrol
             var deger = $("#Cevap").val();  
             if (deger.trim() == "" || deger == "Cevaplayınız..") {
                 alert("Lütfen Cevap Giriniz");
@@ -24,6 +26,7 @@
             
         });
         function AddAnswer() {
+            //ajax ile server side a post işlemi
             $.ajax({
                 url: '/Home/SoruKullanici',
                 data: {
@@ -37,7 +40,7 @@
                     location.reload(true);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    console.log("error");
+                    alert("error");
                 }
             });
         }
@@ -55,12 +58,10 @@
 
 
     }
-
     .title {
         color: black;
         font-size: 18px;
     }
-
     button {
         border: none;
         outline: 0;
@@ -84,11 +85,7 @@
             opacity: 0.7;
         }
 </style>
-<div class="spinner" style="display:block">
-    <div class="center-div">
-        <div class="loader"></div>
-    </div>
-</div>
+
     <div style="margin-top:2%" class="card">
         <br />
         <img style="margin-top:5px;width:200px" src="@Model.PersonPhoto" alt="John">
