@@ -1,0 +1,106 @@
+﻿@model InfolineWork.Models.PersonQuestion
+@{
+    ViewBag.Title = "SoruKullanici";
+}
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
+        PersonQuestionArray = new Array();
+        PersonQuestionObject = new Object();
+        PersonQuestionObject.PersonId = @Model.PersonId;
+        PersonQuestionObject.QuestionId = @Model.QuestionId;
+        
+        $("#btnKaydet").click(function () {
+
+            var deger = $("#Cevap").val();  
+            if (deger.trim() == "" || deger == "Cevaplayınız..") {
+                alert("Lütfen Cevap Giriniz");
+            }
+            else {
+                PersonQuestionObject.Answer = $("#Cevap").val();
+                AddAnswer();
+            }
+            
+        });
+        function AddAnswer() {
+            $.ajax({
+                url: '/Home/SoruKullanici',
+                data: {
+                    "result": PersonQuestionObject
+                },
+                type: "post",
+                //cache: false,
+                success: function (result) {
+                    alert(result);
+                    PersonQuestionArray = new Array();
+                    location.reload(true);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("error");
+                }
+            });
+        }
+    });
+</script>
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        height: 50%;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+        width: 50%;
+        min-width: 300px;
+
+
+    }
+
+    .title {
+        color: black;
+        font-size: 18px;
+    }
+
+    button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+    }
+
+        button:hover, a:hover {
+            opacity: 0.7;
+        }
+</style>
+<div class="spinner" style="display:block">
+    <div class="center-div">
+        <div class="loader"></div>
+    </div>
+</div>
+    <div style="margin-top:2%" class="card">
+        <br />
+        <img style="margin-top:5px;width:200px" src="@Model.PersonPhoto" alt="John">
+        <h1>@Model.Name</h1><br /><br />
+        <p class="title">@Model.Question</p><br />
+
+        <textarea  rows="4" style="width:100%;margin-bottom:20px" id="Cevap">Cevaplayınız..</textarea>
+   
+        <p><button id="btnKaydet">Kaydet</button></p>
+    </div>
+
+
+
+
+

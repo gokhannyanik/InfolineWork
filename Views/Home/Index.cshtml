@@ -1,0 +1,110 @@
+﻿@model IEnumerable<InfolineWork.Models.PersonModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    $(document).ready(function () {
+        PostData = new Array();
+        $("#btnSave").click(function () {
+            
+            $.ajax({
+                url: '/Home/PersonsSave',
+                data: {
+                    "result": PostData
+                },
+                type: "post",
+                //cache: false,
+                success: function (result) {
+                    alert(result);
+                    location.reload(true);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("error");
+                }
+            });
+        });
+
+
+        $.ajax({
+            url: 'https://randomuser.me/api/?nat=tr&results=10',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
+                console.log(data.results.length);
+                for (var i = 0; i < data.results.length; i++) {
+                    console.log(data.results[i]);
+                    $("#myTable").append(' <tr id="">' +
+                        '<td>' +
+                        '<img style="border-radius:50%;margin-right:20px;margin-left:10px" src="' + data.results[i].picture.medium + '" width="90">' +
+                        '</td>' +
+                        '<td>' +
+                        '<div>' + data.results[i].name.first + ' ' + data.results[i].name.last + '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        '<div>' + data.results[i].phone + '</div>' +
+                        '<div>' + data.results[i].email + '</div>' +
+                        '</td>' +
+                        '</tr >');
+
+                    var PostObject = new Object();
+                    PostObject.AdSoyad = data.results[i].name.first + ' ' + data.results[i].name.last;
+                    PostObject.Telefon = data.results[i].phone;
+                    PostObject.Email = data.results[i].email;
+                    PostObject.PersonPhoto =  data.results[i].picture.medium
+                    PostData[i] = PostObject;
+                }
+            },
+            error: function (hata, ajaxOptions, thrownError) {
+                $(".spinner").css("display", "none");
+                console.log(hata);
+                alert(hata.status + " " + hata.responseText);
+            }
+        });
+    });
+</script>
+<style>
+
+    #btnSave {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+        padding: 10px 32px;
+        text-align: center;
+        display: inline-block;
+        font-size: 13px;
+        border-radius: 5px;
+    }
+
+        #btnSave:hover {
+            background-color: #555555;
+            color: white;
+        }
+</style>
+<h2 style="text-align:center">Kullanıcılar Api</h2>
+<div style="clear:both">
+    
+</div>
+<div class="spinner" style="display:block">
+    <div class="center-div">
+        <div class="loader"></div>
+    </div>
+</div>
+<table id="myTable">
+    <tr class="header">
+
+        <th></th>
+        <th style="width:30%;">Kişisel Bilgiler</th>
+        <th style="width:60%;">
+            <div style="position:absolute; right:29px;top:70px">
+                <button type="button" id="btnSave">KAYDET</button>
+            </div>
+        </th>
+    </tr>
+
+</table>
+
+
+
+

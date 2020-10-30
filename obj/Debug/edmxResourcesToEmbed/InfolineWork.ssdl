@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InfolineWorkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblAnswer">
+    <Key>
+      <PropertyRef Name="AnswerId" />
+    </Key>
+    <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" />
+    <Property Name="QuestionId" Type="int" />
+    <Property Name="Answer" Type="nchar" MaxLength="500" />
+    <Property Name="AnswerDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblPerson">
+    <Key>
+      <PropertyRef Name="PersonId" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="100" />
+    <Property Name="Phone" Type="nchar" MaxLength="20" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="PersonPhoto" Type="nchar" MaxLength="500" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'InfolineWork.dbo.tblQuestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblQuestion">
+    <Key>
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="nchar" MaxLength="750" />
+  </EntityType>
+  <EntityContainer Name="InfolineWorkModelStoreContainer">
+    <EntitySet Name="tblAnswer" EntityType="Self.tblAnswer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPerson" EntityType="Self.tblPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuestion" EntityType="Self.tblQuestion" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblQuestion].[QuestionId] AS [QuestionId], 
+    [tblQuestion].[Question] AS [Question]
+    FROM [dbo].[tblQuestion] AS [tblQuestion]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

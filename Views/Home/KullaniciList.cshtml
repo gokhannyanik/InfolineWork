@@ -1,0 +1,141 @@
+﻿@model List<InfolineWork.tblPerson>
+@{
+    ViewBag.Title = "KullaniciList";
+}
+<style>
+
+    #btnDelete {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+        padding: 10px 32px;
+
+        text-align: center;
+        display: inline-block;
+        font-size: 13px;
+        border-radius: 5px;
+
+    }
+    #btnDelete:hover {
+        background-color: #555555;
+        color: white;
+    }
+
+    .double {
+        zoom: 1;
+        transform: scale(2);
+        -ms-transform: scale(2);
+        -webkit-transform: scale(2);
+        -o-transform: scale(2);
+        -moz-transform: scale(2);
+        transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+    }
+</style>
+
+<h2 style="text-align:center">Kullanıcı Listesi</h2>
+<div class="spinner" style="display:block">
+    <div class="center-div">
+        <div class="loader"></div>
+    </div>
+</div>
+<div style="margin-top:10px">
+    <table id="myTable">
+        <tr class="header">
+            <th>
+                <img src="~/Icon/remove.png" />
+            </th>
+            <th>
+            </th>
+            <th style="width:30%;">
+                <img src="~/Icon/user.png" />
+            </th>
+            <th style="width:60%;">
+                <img src="~/Icon/phone.png" />
+                <img src="~/Icon/email.png" />
+                <div style="position:absolute; right:29px;top:70px">
+                    <button type="button" id="btnDelete">
+                        SEÇİLİ OLANLARI SİL
+                    </button>
+                </div>
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr id="Satir">
+                <td>
+                    <input style="margin-left:5px" type="checkbox" class="double" name="@item.PersonId" />
+                </td>
+                <td>
+                    <img style="border-radius:50%;margin-right:20px;margin-left:10px" src="@item.PersonPhoto" width="70">
+                </td>
+                <td>
+                    <div>@item.Name</div>
+                </td>
+                <td>
+                    <div>@item.Phone</div>
+                    <div>@item.Email</div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
+
+        Checked = new Array();
+
+        function CheckedTrue() {
+            $("#Satir input:checked").each(
+                    function (i) {
+                    console.log($(this).attr("name"));
+
+                    //Checked[i] = $(this).attr("name");
+                    CheckedObject = new Object();
+                    CheckedObject.PersonId = $(this).attr("name");
+                    Checked[i] = CheckedObject;
+                    }
+            );
+            var kayitVarmi = Checked.length;
+            if (kayitVarmi == 0) {
+                alert("lütfen Kayıt Seçiniz");
+            }
+            else {
+                PersonsDelete();
+            }
+            
+
+        }
+
+        function PersonsDelete() {
+                $.ajax({
+                    url: '/Home/PersonsDelete',
+                    data: {
+                        "result": Checked
+                    },
+                    type: "post",
+                    //cache: false,
+                    success: function (result) {
+                        alert(result);
+                        Checked = new Array();
+                        location.reload(true);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log("error");
+                    }
+                });
+        }
+        $("#btnDelete").click(function () {
+            console.log(Checked);
+            CheckedTrue();
+            //aaa();
+            //Checked.pop();
+
+        });
+
+    });
+</script>
