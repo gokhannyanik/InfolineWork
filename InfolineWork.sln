@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfolineWork", "InfolineWork\InfolineWork.csproj", "{80721965-1E22-45A8-BF3E-E4512C6E25C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80721965-1E22-45A8-BF3E-E4512C6E25C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80721965-1E22-45A8-BF3E-E4512C6E25C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80721965-1E22-45A8-BF3E-E4512C6E25C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80721965-1E22-45A8-BF3E-E4512C6E25C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {828417F5-E6DF-4813-BE40-4B85697EE6DE}
+	EndGlobalSection
+EndGlobal
