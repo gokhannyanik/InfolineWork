@@ -19,5 +19,6 @@ namespace InfolineWork
         public string Phone { get; set; }
         public string Email { get; set; }
         public string PersonPhoto { get; set; }
+        public byte[] binaryPicture { get; set; }
     }
 }

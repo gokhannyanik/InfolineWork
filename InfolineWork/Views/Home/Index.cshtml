@@ -1,11 +1,14 @@
-﻿@model IEnumerable<InfolineWork.Models.PersonModel>
+﻿@model InfolineWork.Models.PersonModel
 @{
     ViewBag.Title = "Index";
 }
 
 <script>
+    //var base64EncodedStr = btoa(unescape(encodeURIComponent(rawData)));
+    var base64first = "data:image/jpeg;base64,";
+    PostData = new Array();
+    var PostObject = new Object();
     $(document).ready(function () {
-        PostData = new Array();
         $("#btnSave").click(function () {
             //kaydet butonuyla ajax ile server side a post methodu
             $.ajax({
@@ -16,8 +19,10 @@
                 type: "post",
                 //cache: false,
                 success: function (result) {
-                    alert(result);
-                    location.reload(true);
+                    console.log(result);
+                    var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(result)));// binary data yı base64 e çevirir
+                    console.log(base64String);
+                    $("#path2").attr("src", base64first + base64String);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log("error");
@@ -25,76 +30,36 @@
             });
         });
 
-        // ekran load olduğunda direk kullanıcı apisini çekmek için ajax ile wep abi get işlemi
-        $.ajax({
-            url: 'https://randomuser.me/api/?nat=tr&results=10',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                setTimeout(function () { $(".spinner").css("display", "none"); }, 250);
-                //data içerisinde dönerek ekrana kullanıcıları yazma kısmı
-                for (var i = 0; i < data.results.length; i++) {
-                    console.log(data.results[i]);
-                    $("#myTable").append(' <tr id="">' +
-                        '<td>' +
-                        '<img style="border-radius:50%;margin-right:20px;margin-left:10px" src="' + data.results[i].picture.medium + '" width="90">' +
-                        '</td>' +
-                        '<td>' +
-                        '<div>' + data.results[i].name.first + ' ' + data.results[i].name.last + '</div>' +
-                        '</td>' +
-                        '<td>' +
-                        '<div>' + data.results[i].phone + '</div>' +
-                        '<div>' + data.results[i].email + '</div>' +
-                        '</td>' +
-                        '</tr >');
-                    //server side a post işlemi yapmak için obje oluşturuyoruz
-                    var PostObject = new Object();
-                    PostObject.AdSoyad = data.results[i].name.first + ' ' + data.results[i].name.last;
-                    PostObject.Telefon = data.results[i].phone;
-                    PostObject.Email = data.results[i].email;
-                    PostObject.PersonPhoto =  data.results[i].picture.medium
-                    PostData[i] = PostObject;
-                }
-            },
-            error: function (hata, ajaxOptions, thrownError) {
-                $(".spinner").css("display", "none");
-                console.log(hata);
-                alert(hata.status + " " + hata.responseText);
-            }
+        $('#cevir').click(function () {
+
+            $("#path2").attr("src", base64first + base64);
+
         });
     });
-</script>
-<style>
 
-    #btnSave {
-        background-color: white;
-        color: black;
-        border: 2px solid #555555;
-        padding: 10px 32px;
-        text-align: center;
-        display: inline-block;
-        font-size: 13px;
-        border-radius: 5px;
-    }
-
-        #btnSave:hover {
-            background-color: #555555;
-            color: white;
+    function resimgetir(inputElement) {
+        var binaryBlob;
+        var file = inputElement.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            $("#path").attr("src", reader.result);
+            var data = (reader.result).split(',')[1];//base64 hali
+            PostObject.binaryImage = JSON.stringify(data);
+            console.log(data);
+            PostData[0] = PostObject;
         }
-</style>
-<h2 style="text-align:center">Kullanıcılar Api</h2>
-<table id="myTable">
-    <tr class="header">
-        <th></th>
-        <th style="width:30%;">Kişisel Bilgiler</th>
-        <th style="width:60%;">
-            <div style="position:absolute; right:29px;top:70px">
-                <button type="button" id="btnSave">KAYDET</button>
-            </div>
-        </th>
-    </tr>
+        reader.readAsDataURL(file);
+        
+    }
+</script>
 
-</table>
+<div>
+    <input id="resim" type="file" onchange="resimgetir(this)" />
+    <img id="path" height="100" />
+    <button id="btnSave">kaydet</button>
+
+    <img id="path2"  />
+</div>
 
 
 

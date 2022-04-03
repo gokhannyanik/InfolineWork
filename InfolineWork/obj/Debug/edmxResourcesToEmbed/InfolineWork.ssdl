@@ -7,7 +7,7 @@
     <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonId" Type="int" />
     <Property Name="QuestionId" Type="int" />
-    <Property Name="Answer" Type="nchar" MaxLength="500" />
+    <Property Name="Answer" Type="nvarchar" MaxLength="500" />
     <Property Name="AnswerDate" Type="datetime" />
   </EntityType>
   <EntityType Name="tblPerson">
@@ -19,6 +19,7 @@
     <Property Name="Phone" Type="nchar" MaxLength="20" />
     <Property Name="Email" Type="nchar" MaxLength="50" />
     <Property Name="PersonPhoto" Type="nchar" MaxLength="500" />
+    <Property Name="binaryPicture" Type="varbinary(max)" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'InfolineWork.dbo.tblQuestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

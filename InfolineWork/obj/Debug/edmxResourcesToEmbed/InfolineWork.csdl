@@ -14,6 +14,7 @@
     <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="PersonPhoto" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="binaryPicture" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="tblQuestion">
     <Key>
@@ -29,7 +30,7 @@
     <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PersonId" Type="Int32" />
     <Property Name="QuestionId" Type="Int32" />
-    <Property Name="Answer" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="AnswerDate" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

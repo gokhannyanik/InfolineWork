@@ -5,7 +5,10 @@ using System.Web;
 
 namespace InfolineWork.Models
 {
-
+    public class ImageP
+    {
+        public byte[] binaryImage { get; set; }
+    }
 
     public class PersonModel
     {
@@ -14,6 +17,7 @@ namespace InfolineWork.Models
         public string Telefon { get; set; }
         public string Email { get; set; }
         public string PersonPhoto { get; set; }
+        public byte[] binaryImage { get; set; }
 
     }
     public class PersonQuestion

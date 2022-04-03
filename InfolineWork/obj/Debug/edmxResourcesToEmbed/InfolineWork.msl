@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblPerson">
       <EntityTypeMapping TypeName="InfolineWorkModel.tblPerson">
         <MappingFragment StoreEntitySet="tblPerson">
+          <ScalarProperty Name="binaryPicture" ColumnName="binaryPicture" />
           <ScalarProperty Name="PersonPhoto" ColumnName="PersonPhoto" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />

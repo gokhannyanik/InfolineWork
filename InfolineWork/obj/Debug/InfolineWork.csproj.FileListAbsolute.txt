@@ -73,4 +73,6 @@ C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\obj\Debug\InfolineWork.c
 C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\obj\Debug\InfolineWork.csproj.CopyComplete
 C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\obj\Debug\InfolineWork.dll
 C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\obj\Debug\InfolineWork.pdb
+C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\bin\RestSharp.dll
+C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\bin\RestSharp.xml
 C:\Users\MONSTER\source\repos\InfolineWork\InfolineWork\obj\Debug\InfolineWork.csprojAssemblyReference.cache

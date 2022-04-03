@@ -1,42 +1,59 @@
 ﻿using InfolineWork.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Generator;
-
 namespace InfolineWork.Controllers
 {
-    
     public class HomeController : Controller
     {
         public InfolineWorkEntities db = new InfolineWorkEntities();
         // GET: Home
-        public ActionResult Index()
+
+        //private string urlParameters = "?api_key=123";
+        public  ActionResult Index()
         {
-            return View();
+            int aq = 144;
+            var deger = db.tblPerson.FirstOrDefault(a => a.PersonId == aq);
+            //var s = Convert.ToBase64String(deger.binaryPicture);
+            PersonModel newPerson = new PersonModel
+            {
+                binaryImage = deger.binaryPicture
+            };
+            return View(newPerson);
         }
         //Api yi Veitabanına kaydetme postu
         [HttpPost]
-        public JsonResult PersonsSave(IEnumerable<PersonModel> result)
+        public JsonResult PersonsSave(IEnumerable<ImageP> result)
         {
-
+            byte[] binaryDeger;
             foreach (var item in result)
             {
+                binaryDeger = item.binaryImage
                 tblPerson newPerson = new tblPerson
                 {
-                    Name = item.AdSoyad,
-                    Phone = item.Telefon,
-                    Email = item.Email,
-                    PersonPhoto = item.PersonPhoto
+                    Name = "gökhan",
+                    Phone = "",
+                    Email = "",
+                    PersonPhoto ="",
+                    binaryPicture = item.binaryImage
                 };
                 db.tblPerson.Add(newPerson);
             }
             try
             {
                 db.SaveChanges();
-                return Json("Kayıt İşlemi Gerçekleştirildi");
+                var deger = db.tblPerson.FirstOrDefault(a => a.PersonId == 155);
+
+                return Json(deger.binaryPicture);
             }
             catch (Exception ex)
             {

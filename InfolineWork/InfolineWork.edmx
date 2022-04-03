@@ -12,7 +12,7 @@
           <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PersonId" Type="int" />
           <Property Name="QuestionId" Type="int" />
-          <Property Name="Answer" Type="nchar" MaxLength="500" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="500" />
           <Property Name="AnswerDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tblPerson">
@@ -24,6 +24,7 @@
           <Property Name="Phone" Type="nchar" MaxLength="20" />
           <Property Name="Email" Type="nchar" MaxLength="50" />
           <Property Name="PersonPhoto" Type="nchar" MaxLength="500" />
+          <Property Name="binaryPicture" Type="varbinary(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'InfolineWork.dbo.tblQuestion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -62,6 +63,7 @@ warning 6002: The table/view 'InfolineWork.dbo.tblQuestion' does not have a prim
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="PersonPhoto" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="binaryPicture" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblQuestion">
           <Key>
@@ -77,7 +79,7 @@ warning 6002: The table/view 'InfolineWork.dbo.tblQuestion' does not have a prim
           <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PersonId" Type="Int32" />
           <Property Name="QuestionId" Type="Int32" />
-          <Property Name="Answer" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AnswerDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
@@ -89,6 +91,7 @@ warning 6002: The table/view 'InfolineWork.dbo.tblQuestion' does not have a prim
         <EntitySetMapping Name="tblPerson">
             <EntityTypeMapping TypeName="InfolineWorkModel.tblPerson">
               <MappingFragment StoreEntitySet="tblPerson">
+                <ScalarProperty Name="binaryPicture" ColumnName="binaryPicture" />
                 <ScalarProperty Name="PersonPhoto" ColumnName="PersonPhoto" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
